@@ -40,7 +40,9 @@ jobs:
       - name: Start Pinggy Tunnel
         shell: bash
         run: |
-          ssh -p 443 -R0:127.0.0.1:3389 qr+tcp@free.pinggy.io | tee pinggy.log &
+          ssh -p 443 -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -R0:127.0.0.1:3389 tcp@free.pinggy.io
+          
+          | tee pinggy.log &
           sleep 20
           addr=$(grep -oE 'tcp://[a-zA-Z0-9.-]+:[0-9]+' pinggy.log | head -n1)
           echo "PINGGY_ADDR=$addr" >> $GITHUB_ENV
