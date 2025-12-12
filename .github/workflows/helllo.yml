@@ -22,7 +22,7 @@ jobs:
       - name: Create RDP User
         shell: powershell
         run: |
-          $password = "P@ssw0rd123!"
+          $password = "12345678"
           $securePass = ConvertTo-SecureString $password -AsPlainText -Force
           if (-not (Get-LocalUser -Name "RDP" -ErrorAction SilentlyContinue)) {
             New-LocalUser -Name "RDP" -Password $securePass -AccountNeverExpires
